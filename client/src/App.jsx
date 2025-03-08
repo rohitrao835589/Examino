@@ -1,8 +1,8 @@
 import React from 'react'
-
+import {AddQuestion} from './components/import'
 const App = () => {
   return (
-    <div>App</div>
+    <AddQuestion />
   )
 }
 
