@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-function AddQuestion({ questionNumber }) {
+function AddQuestion({addNewQuestion }) {
     // State to store the question details
     const [question, setQuestion] = useState({
-        id: questionNumber,
+        id: nanoid(6),
         title: "",
         optionType: "choice",
         options: [
@@ -41,17 +41,32 @@ function AddQuestion({ questionNumber }) {
             ],
         }));
     }
+    function handleSubmit(event){
+        event.preventDefault();
+        addNewQuestion(question);
+        setQuestion({
+            id: nanoid(6),
+            title: "",
+            optionType: "choice",
+            options: [
+                { id: nanoid(6), text: "Option 1" },
+                { id: nanoid(6), text: "Option 2" }
+            ]
+        })
+    }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             {/* Input for question title */}
             <input
                 type="text"
                 name="title"
+                placeholder='Enter Question here'
                 value={question.title}
                 onChange={(event) =>
                     setQuestion((prev) => ({ ...prev, title: event.target.value }))
                 }
+                required
             />
 
             {/* Select field for option type */}
@@ -77,6 +92,7 @@ function AddQuestion({ questionNumber }) {
                                 onChange={(event) =>
                                     handleOptionChange(event.target.value, option.id)
                                 }
+                                required
                             />
                             <button
                                 type="button"
@@ -91,6 +107,8 @@ function AddQuestion({ questionNumber }) {
                     </button>
                 </div>
             )}
+
+            <button type="submit">Add Question</button>
         </form>
     );
 }
