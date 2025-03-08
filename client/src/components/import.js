@@ -1,3 +1,3 @@
 import AddQuestion from "./AddQuestion/AddQuestion";
-
-export {AddQuestion};
+import DisplayQuestion from "./DisplayQuestion/DisplayQuestion";
+export {AddQuestion , DisplayQuestion};

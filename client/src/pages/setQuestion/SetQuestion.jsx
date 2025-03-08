@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-import { AddQuestion } from '../../components/import'
+import { AddQuestion  , DisplayQuestion } from '../../components/import'
 function SetQuestion() {
-    const [questions , setQuestions] = useState([])
+    const [questions , setQuestions] = useState([]);
+    const [editableQuestionId, setEditableQuestionId] = useState(null);
     function handleAdd(newQuestion){
         setQuestions((prev)=>[...prev , newQuestion]);
-        console.log("here");
-        
+    }
+    function handleEdit(updatedQuestion) {
+        setQuestions((prev) =>
+            prev.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q))
+        );
+        setEditableQuestionId(null); // Exit edit mode
     }
   return (
     <>
-        <AddQuestion addNewQuestion={handleAdd}/>
         {questions.map((question)=>(
-            <h1 key={question.id}>{question.title}</h1>
+            editableQuestionId===question.id?
+            (<AddQuestion addNewQuestion={handleEdit} existingQuestion={question} key={question.id}/>):
+            (<DisplayQuestion question={question} handleClick={()=>{setEditableQuestionId(question.id)}} key={question.id}/>)
         ))}
+        <AddQuestion addNewQuestion={handleAdd}/>
     </>
   )
 }

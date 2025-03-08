@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-function AddQuestion({addNewQuestion }) {
+function AddQuestion({addNewQuestion , existingQuestion = null }) {
     // State to store the question details
-    const [question, setQuestion] = useState({
+    const [question, setQuestion] = useState(
+        existingQuestion || 
+        {
         id: nanoid(6),
         title: "",
         optionType: "choice",
