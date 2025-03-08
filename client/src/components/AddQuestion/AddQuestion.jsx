@@ -1,61 +1,98 @@
-import { React, useState, useEffect } from 'react'
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 function AddQuestion({ questionNumber }) {
+    // State to store the question details
     const [question, setQuestion] = useState({
+        id: questionNumber,
         title: "",
         optionType: "choice",
-        options: ["option 1", "option 2"]
+        options: [
+            { id: nanoid(6), text: "Option 1" },
+            { id: nanoid(6), text: "Option 2" }
+        ]
     });
 
-    function handleOptionChange(value, index) {
-        setQuestion((prev) => {
-            const newArray = [...prev.options];
-            newArray[index] = value;
-            return { ...prev, options: newArray }
-        })
+    // Update option text when changed
+    function handleOptionChange(value, id) {
+        setQuestion((prev) => ({
+            ...prev,
+            options: prev.options.map((option) =>
+                option.id === id ? { ...option, text: value } : option
+            ),
+        }));
     }
+
+    // Delete an option
+    function handleOptionDelete(id) {
+        setQuestion((prev) => ({
+            ...prev,
+            options: prev.options.filter((option) => option.id !== id),
+        }));
+    }
+
+    // Add a new option (ensuring unique IDs)
+    function handleOptionAdd() {
+        setQuestion((prev) => ({
+            ...prev,
+            options: [
+                ...prev.options,
+                { id: nanoid(6), text: `Option ${prev.options.length + 1}` }
+            ],
+        }));
+    }
+
     return (
-        <>
-            <form >
-                <input
-                    type="text"
-                    name="title"
-                    value={question.title}
-                    onChange={(event) => (setQuestion((prev) => ({ ...prev, title: event.target.value })))}
-
-                />
-                <select
-                    name="optionType"
-                    value={question.optionType}
-                    onChange={(event) => setQuestion((prev) => ({ ...prev, optionType: event.target.value }))}
-                >
-                    <option value="choice">Multiple Choice</option>
-                    <option value="textBox">Text Box</option>
-                </select>
-                {question.optionType == "choice" &&
-                    <div>{
-                        question.options.map((value, index) => (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    value={value}
-                                    onChange={(event) => (handleOptionChange(event.target.value, index))}
-
-                                />
-                                <br />
-                            </div>
-                        ))
-                    }
-                        <button
-                            type="button"
-                            onClick={() => setQuestion((prev) => ({ ...prev, options: [...prev.options, `option ${prev.options.length + 1}`] }))}
-                        >➕</button>
-                    </div>
+        <form>
+            {/* Input for question title */}
+            <input
+                type="text"
+                name="title"
+                value={question.title}
+                onChange={(event) =>
+                    setQuestion((prev) => ({ ...prev, title: event.target.value }))
                 }
-                {/* <div>{question.options}</div> */}
-            </form>
-        </>
-    )
+            />
+
+            {/* Select field for option type */}
+            <select
+                name="optionType"
+                value={question.optionType}
+                onChange={(event) =>
+                    setQuestion((prev) => ({ ...prev, optionType: event.target.value }))
+                }
+            >
+                <option value="choice">Multiple Choice</option>
+                <option value="textBox">Text Box</option>
+            </select>
+
+            {/* Render multiple choice options dynamically */}
+            {question.optionType === "choice" && (
+                <div>
+                    {question.options.map((option) => (
+                        <div key={option.id}>
+                            <input
+                                type="text"
+                                value={option.text}
+                                onChange={(event) =>
+                                    handleOptionChange(event.target.value, option.id)
+                                }
+                            />
+                            <button
+                                type="button"
+                                onClick={() => handleOptionDelete(option.id)}
+                            >
+                                ❌
+                            </button>
+                        </div>
+                    ))}
+                    <button type="button" onClick={handleOptionAdd}>
+                        ➕ Add Option
+                    </button>
+                </div>
+            )}
+        </form>
+    );
 }
 
-export default AddQuestion
+export default AddQuestion;
