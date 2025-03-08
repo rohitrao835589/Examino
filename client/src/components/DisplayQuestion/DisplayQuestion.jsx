@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DisplayQuestion({question , handleClick}) {
+function DisplayQuestion({question , handleClick=null}) {
   return (
     <div onClick={handleClick}>
       <h2>{question.title}</h2>

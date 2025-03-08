@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState  , useRef , useEffect} from 'react';
 import { nanoid } from 'nanoid';
 
 function AddQuestion({addNewQuestion , existingQuestion = null }) {
     // State to store the question details
+    const lastInputRef = useRef(null); 
     const [question, setQuestion] = useState(
         existingQuestion || 
         {
@@ -11,10 +12,11 @@ function AddQuestion({addNewQuestion , existingQuestion = null }) {
         optionType: "choice",
         options: [
             { id: nanoid(6), text: "Option 1" },
-            { id: nanoid(6), text: "Option 2" }
         ]
     });
-
+    useEffect(()=>{
+        lastInputRef.current?.focus();
+    },[question.options.length])
     // Update option text when changed
     function handleOptionChange(value, id) {
         setQuestion((prev) => ({
@@ -86,14 +88,16 @@ function AddQuestion({addNewQuestion , existingQuestion = null }) {
             {/* Render multiple choice options dynamically */}
             {question.optionType === "choice" && (
                 <div>
-                    {question.options.map((option) => (
+                    {question.options.map((option , index) => (
                         <div key={option.id}>
                             <input
+                                ref={(index===question.options.length-1 && index!=0)?lastInputRef : null}
                                 type="text"
                                 value={option.text}
                                 onChange={(event) =>
                                     handleOptionChange(event.target.value, option.id)
                                 }
+                                onFocus={(event) => event.target.select()} 
                                 required
                             />
                             <button
@@ -110,7 +114,7 @@ function AddQuestion({addNewQuestion , existingQuestion = null }) {
                 </div>
             )}
 
-            <button type="submit">Add Question</button>
+            <button type="submit">Done</button>
         </form>
     );
 }
