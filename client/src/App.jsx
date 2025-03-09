@@ -1,9 +1,12 @@
 import React from 'react'
-import { SetQuestion } from './pages/import'
+import {useNavigate} from 'react-router-dom'
 const App = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <SetQuestion />
+      <h1>welcome user</h1>
+      <p>here you can create a web based taste without any complexity</p>
+      <button type="button" onClick={()=>navigate('/dashboard')}>Start</button>
     </>
   )
 }

@@ -3,8 +3,6 @@ import { AddQuestion  , DisplayQuestion } from '../../components/import'
 import { useParams } from "react-router-dom";
 function SetQuestion() {
     const {id} = useParams();
-    console.log(id);
-    
     const [questions , setQuestions] = useState([]);
     const [editableQuestionId, setEditableQuestionId] = useState(null);
     function handleAdd(newQuestion){
@@ -16,6 +14,13 @@ function SetQuestion() {
         );
         setEditableQuestionId(null); // Exit edit mode
     }
+    function handleSubmit(){
+
+        const data = {
+            Testid : id,
+            questions: questions
+        }
+    }
   return (
     <>
         {questions.map((question)=>(
@@ -24,6 +29,7 @@ function SetQuestion() {
             (<DisplayQuestion question={question} handleClick={()=>{setEditableQuestionId(question.id)}} key={question.id}/>)
         ))}
         <AddQuestion addNewQuestion={handleAdd}/>
+        <button type="button" onClick={handleSubmit}>Save Test</button>
     </>
   )
 }
