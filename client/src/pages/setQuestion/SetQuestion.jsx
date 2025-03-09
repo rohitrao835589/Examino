@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { AddQuestion  , DisplayQuestion } from '../../components/import'
+import { useParams } from "react-router-dom";
 function SetQuestion() {
+    const {id} = useParams();
+    console.log(id);
+    
     const [questions , setQuestions] = useState([]);
     const [editableQuestionId, setEditableQuestionId] = useState(null);
     function handleAdd(newQuestion){

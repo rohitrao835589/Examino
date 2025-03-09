@@ -1,2 +1,3 @@
 import SetQuestion from "./setQuestion/SetQuestion";
-export {SetQuestion}
+import DashBoard from "./dashboard/DashBoard";
+export {SetQuestion , DashBoard}

@@ -1,5 +1,6 @@
 import {createBrowserRouter} from 'react-router-dom'
 import App from '../App'
+import {DashBoard , SetQuestion} from '../pages/import'
 const  router = createBrowserRouter([
     {
         path:'/',
@@ -7,10 +8,10 @@ const  router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element: <div>This is dash Board</div>,
+        element: <DashBoard />,
     },{
         path:'/test/:id/edit',
-        element: <div>hellow you are going to create a Test</div>
+        element: <SetQuestion />
     }
 ])
 export default router
