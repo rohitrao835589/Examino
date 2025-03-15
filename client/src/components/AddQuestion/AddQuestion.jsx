@@ -51,20 +51,20 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
       id: nanoid(6),
       title: "",
       optionType: "choice",
-      options: [
-        { id: nanoid(6), text: "Option 1" },
-        { id: nanoid(6), text: "Option 2" },
-      ],
+      options: [{ id: nanoid(6), text: "Option 1" }],
     });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-4 my-4 shadow-md rounded-xl "
+    >
       {/* this section include the input and option type choice */}
       <div className="w-[100%]">
         {/* Input for question title */}
         <input
-          className=" sm:w-[60%] w-[100%] bg-neutral-50 h-12 focus:bg-neutral-100 pl-2 border-b-2 focus:border-b-3 outline-none "
+          className=" sm:w-[60%] w-[100%] bg-neutral-50 h-12 focus:bg-neutral-100 pl-2 border-b-2 focus:border-b-3 outline-none hover:bg-neutral-100 "
           type="text"
           name="title"
           placeholder="Untitled Question"
@@ -151,7 +151,7 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
         type="submit"
         className="bg-sky-500 hover:bg-sky-600 text-white 
   rounded-2xl py-2 px-6 sm:text-lg text-md font-semibold 
-  shadow-md transition-all ease-in-out duration-200"
+  shadow-md transition-all ease-in-out duration-200 mt-3"
       >
         Done
       </button>
