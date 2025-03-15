@@ -20,6 +20,8 @@ function SetQuestion() {
             Testid : id,
             questions: questions
         }
+        console.log(data);
+        
     }
   return (
     <>
