@@ -2,6 +2,7 @@ import React, { useState  , useRef , useEffect} from 'react';
 import { nanoid } from 'nanoid';
 
 function AddQuestion({addNewQuestion , existingQuestion = null }) {
+
     // State to store the question details
     const lastInputRef = useRef(null); 
     const [question, setQuestion] = useState(
@@ -60,7 +61,7 @@ function AddQuestion({addNewQuestion , existingQuestion = null }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className=''>
             {/* Input for question title */}
             <input
                 type="text"
