@@ -7,13 +7,14 @@ function DisplayQuestion({question , handleClick=null}) {
       {(question.optionType === "textBox")?(
         <textarea name="" id=""></textarea>
       ):
-      (
-        question.options.map((option)=>(
-          <div key={option.id}>
-            <label htmlFor={option.id}>{option.text}</label>
-            <input type="radio" name={`question-${question.id}`} id={option.id} value={option.text} />
-          </div>
-        ))
+      ( 
+        <ul>
+          {
+          question.options.map((option)=>(
+              <li key={option.id}>{option.text}</li>
+          ))
+          }
+        </ul>
       )
       }
     </div>
