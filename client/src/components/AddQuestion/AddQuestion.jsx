@@ -58,7 +58,7 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-4 my-4 shadow-md rounded-xl "
+      className="bg-white p-4 my-4 shadow-md rounded-xl"
     >
       {/* this section include the input and option type choice */}
       <div className="w-[100%]">
@@ -77,7 +77,7 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
 
         {/* Select field for option type */}
         <select
-          className="sm:w-[35%] w-[50%] h-10 ml-2 outline-1 max-sm:my-3 rounded-sm sm:text-center max-sm:pl-2"
+          className="sm:w-[35%] w-[50%] h-10 ml-2 outline-1 max-sm:my-3 rounded-sm sm:text-center max-sm:pl-2 cursor-pointer"
           name="optionType"
           value={question.optionType}
           onChange={(event) =>
@@ -89,7 +89,7 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
         </select>
       </div>
       {/* Render multiple choice options dynamically */}
-      {question.optionType === "choice" && (
+      {question.optionType === "choice" ? (
         <div className="m-2">
           {question.options.map((option, index) => (
             <div key={option.id} className=" h-10 ">
@@ -145,6 +145,15 @@ function AddQuestion({ addNewQuestion, existingQuestion = null }) {
               className="cursor-text ml-2 outline-none hover:border-b-1 focus:border-b-2 text-stone-400 "
             />
           </button>
+        </div>
+      ) : (
+        <div>
+          <input
+            className=" sm:w-[60%] w-[100%]  h-12 pl-2 border-b-1 outline-none cursor-default "
+            type="text"
+            placeholder="Answer text"
+            readOnly
+          />
         </div>
       )}
       <button
