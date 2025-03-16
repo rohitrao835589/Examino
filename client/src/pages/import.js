@@ -1,3 +1,4 @@
 import SetQuestion from "./setQuestion/SetQuestion";
 import DashBoard from "./dashboard/DashBoard";
-export {SetQuestion , DashBoard}
+import Result from "./result/Result";
+export {SetQuestion , DashBoard , Result}

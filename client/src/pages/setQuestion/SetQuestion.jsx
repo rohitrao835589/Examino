@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { AddQuestion, DisplayQuestion } from "../../components/import";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 function SetQuestion() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
   const [editableQuestionId, setEditableQuestionId] = useState(null);
@@ -19,7 +20,7 @@ function SetQuestion() {
       Testid: id,
       questions: questions,
     };
-    console.log(data);
+    navigate(`/test/${id}/result` ,{state:data});
   }
   return (
     <div className="bg-purple-100 flex justify-center p-3 md:px-0 min-h-[100dvh]">
