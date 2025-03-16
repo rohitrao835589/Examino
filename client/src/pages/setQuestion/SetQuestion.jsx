@@ -42,7 +42,7 @@ function SetQuestion() {
           )
         )}
         <AddQuestion addNewQuestion={handleAdd} />
-        <button type="button" onClick={handleSubmit}>
+        <button type="button" onClick={handleSubmit} className=" bg-blue-700  px-7 py-2 rounded-2xl text-xl hover:bg-blue-400 font-bold text-white shadow-md">
           Save Test
         </button>
       </div>
