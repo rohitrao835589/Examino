@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AddQuestion, DisplayQuestion } from "../../components/import";
 import { useParams , useNavigate} from "react-router-dom";
+import { sendPostRequest } from "../../services/api.js";
 function SetQuestion() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -20,6 +21,8 @@ function SetQuestion() {
       Testid: id,
       questions: questions,
     };
+    sendPostRequest(id , data);
+    
     navigate(`/test/${id}/result` ,{state:data});
   }
   return (

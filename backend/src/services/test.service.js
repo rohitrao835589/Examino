@@ -12,7 +12,6 @@ async function saveTest(testData) {
         data.save();
     } catch (error) {
         throw new Error(error.message);
-        
     }
 }
 

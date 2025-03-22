@@ -1,21 +1,47 @@
 import mongoose, { Schema } from "mongoose";
 
-const testSchema = new Schema({
-    Testid:{
-        type : String,
-        required : [true , "id is required"],
-        unique : [true , "Test alredy Exist"]
+const optionSchema = new Schema({
+    Optionid: String,
+    text: String
+}, { _id: false }); 
+
+const questionsSchema = new Schema({
+    Questionid: {
+        type: String,
+        required: [true, "Question must have an id"]
     },
-    questions:{
-        type : Array,
-        required:[true , "Question Array is required for test"],
+    title: {
+        type: String,
+        required: [true, "Question must have a title"]
+    },
+    optionType: {
+        type: String,
+        enum: ["choice", "textBox"],
+        required: true
+    },
+    options: {
+        type: [optionSchema],
+        default: [] 
+    }
+}, { _id: false }); 
+
+const testSchema = new Schema({
+    Testid: {
+        type: String,
+        required: [true, "Testid is required"],
+        unique: true 
+    },
+    questions: {
+        type: [questionsSchema],
+        default: []
     },
     createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-})
+        type: Date,
+        default: Date.now
+    }
+});
 
-const Test = mongoose.model("test" , testSchema);
+const Test = mongoose.model("Test", testSchema);
 
 export default Test;
+

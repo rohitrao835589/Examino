@@ -6,11 +6,16 @@ async function handleGetrequest(req , res){
     res.send(data);
 }
 async function handlePostRequest(req , res){
-    const id = req.params.id;
-    // console.log(id , req.body);
-    
-    const data = await  saveTest(req.body);
-    res.send(data);
+    try {
+        const questionData = req.body;
+        console.log(questionData);
+        
+        await  saveTest(questionData);
+        res.send("success");
+    } catch (error) {
+        console.log(error.message);
+        res.send("error");
+    }
 }
 
 export {handleGetrequest , handlePostRequest};
