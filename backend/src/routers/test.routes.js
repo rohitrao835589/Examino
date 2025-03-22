@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { getTestById, saveTest } from "../services/test.service";
-const router = Router();
+import { handleGetrequest  , handlePostRequest} from "../controllers/test.controller.js";
+const testRouter = Router();
 
-router.get("/", );
+testRouter.get("/:id",handleGetrequest );
+testRouter.post('/:id' , handlePostRequest);
+export default testRouter;

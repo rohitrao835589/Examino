@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const testSchema = new Schema({
-    id:{
+    Testid:{
         type : String,
         required : [true , "id is required"],
         unique : [true , "Test alredy Exist"]
