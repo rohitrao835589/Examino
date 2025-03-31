@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { DashBoard, SetQuestion, Result } from "../pages/import";
-import PreviewQuestion from "../pages/result/PreviewQuestion";
-import TestSetting from "../pages/result/TestSetting";
+import { DashBoard, SetQuestion, Result, TestSetting } from "../pages/import";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/test/:id/edit",
     element: <SetQuestion />,
+  },
+  {
+    path: "/test/:id/setting",
+    element: <TestSetting />,
   },
   {
     path: "/test/:id/result",

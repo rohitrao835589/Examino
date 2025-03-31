@@ -14,7 +14,7 @@ function SetQuestion() {
     setQuestions((prev) =>
       prev.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q))
     );
-    setEditableQuestionId(null); // Exit edit mode
+    setEditableQuestionId(null); 
   }
   function handleSubmit() {
     const data = {
@@ -23,7 +23,7 @@ function SetQuestion() {
     };
     sendPostRequest(id , data);
     
-    navigate(`/test/${id}/result` ,{state:data});
+    navigate(`/test/${id}/setting` ,{state:data});
   }
   return (
     <div className="bg-purple-100 flex justify-center p-3 md:px-0 min-h-[100dvh]">
