@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 const optionSchema = new Schema({
-    Optionid: String,
+    id: String,
     text: String
 }, { _id: false }); 
 
 const questionsSchema = new Schema({
-    Questionid: {
+    id: {
         type: String,
         required: [true, "Question must have an id"]
     },
