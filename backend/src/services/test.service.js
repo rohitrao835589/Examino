@@ -2,7 +2,7 @@ import Test from "../model/test.model.js";
 
 async function getTestById(id){
 
-    const data = await Test.findOne({id:id});
+    const data = await Test.findOne({Testid:id} , {_id:false , createdAt:false , __v: false});
     return data;
 }
 

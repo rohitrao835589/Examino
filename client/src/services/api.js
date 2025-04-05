@@ -1,12 +1,21 @@
 import axios from 'axios';
-function sendPostRequest(id , data){
+function sendPostRequest(data){
 
-    const url =`${import.meta.env.VITE_API_BASE_URL}/${id}`;
+    const url =`${import.meta.env.VITE_API_BASE_URL}/${data.Testid}`;
     axios.post(url, data, {
         headers: {
             'Content-Type': 'application/json' 
         }
     }) 
 }
-
-export {sendPostRequest};
+async function fetchData(id) {
+    const url = `${import.meta.env.VITE_API_BASE_URL}/${id}`;
+    try {
+      const response = await axios.get(url);
+      return response.data; 
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null; 
+    }
+  }
+export {sendPostRequest , fetchData};

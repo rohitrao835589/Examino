@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { sendPostRequest } from "../../services/api";
 function TestSetting() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +33,9 @@ function TestSetting() {
       ...data,
       settings:settings
     }
-    navigate('/test/${id}/result' , {state:newData});
+    
+    sendPostRequest(newData);
+    navigate(`/test/${newData.Testid}/result` , {state:newData});
   }
   return (
     <div className="bg-purple-100 flex justify-center items-center min-h-screen p-5">

@@ -5,6 +5,13 @@ const optionSchema = new Schema({
     text: String
 }, { _id: false }); 
 
+const settingSchema = new Schema({
+    fullScreenMode: Boolean,
+    allowTabSwitch: Boolean,
+    allowCopy: Boolean,
+    shuffleQuestions: Boolean,
+  }, { _id: false });
+  
 const questionsSchema = new Schema({
     id: {
         type: String,
@@ -35,11 +42,16 @@ const testSchema = new Schema({
         type: [questionsSchema],
         default: []
     },
+    settings: {
+        type: settingSchema,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
+
 
 const Test = mongoose.model("Test", testSchema);
 
