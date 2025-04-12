@@ -1,10 +1,10 @@
-import User from '../model/user.model';
+import User from '../model/user.model.js';
 
 async function saveNewUser(newUserData) {
     try {
         const userToSave = new User(newUserData);
         const savedUser = await userToSave.save(); 
-        return savedUser; 
+        return savedUser._id; 
     } catch (error) {
         throw new Error(`Error saving user: ${error.message}`); 
     }
