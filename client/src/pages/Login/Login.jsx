@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import {sendLoginRequest , sendRegisterRequest} from '../../services/api'
 function Login() {
+  const navigate = useNavigate();
   const [login, setLogin] = useState(true);
 
   const [loginDetails, setLoginDetails] = useState({
@@ -18,16 +20,21 @@ function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    console.log(loginDetails);
     const response = await sendLoginRequest(loginDetails);
-    console.log(response);
-    
+    if(response===200){
+      navigate('/dashboard');
+    }else{
+      alert(response);
+    }
   }
   async function handleSingUp(e) {
     e.preventDefault();
-    console.log(registerDetails);
     const response = await sendRegisterRequest(registerDetails);
-    console.log(response);
+    if(response===201){
+      navigate('/dashboard');
+    }else{
+      alert(response);
+    }
   }
   return (
     <div className="flex justify-center items-center w-screen h-screen bg-gray-100">
