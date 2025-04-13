@@ -18,4 +18,26 @@ async function fetchData(id) {
       return null; 
     }
   }
-export {sendPostRequest , fetchData};
+  async function sendLoginRequest(credentials) {
+    const url = `${import.meta.env.VITE_API_BASE_URL}/user/login`;
+  
+    try {
+      const response = await axios.post(url, credentials);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Login failed:", error.response?.data || error.message);
+      throw error; 
+    }
+  }
+  async function sendRegisterRequest(credentials) {
+    const url = `${import.meta.env.VITE_API_BASE_URL}/user/register`;
+  
+    try {
+      const response = await axios.post(url, credentials);
+      return response.data;
+    } catch (error) {
+      console.error("Login failed:", error.response?.data || error.message);
+      throw error; 
+    }
+  }
+export {sendPostRequest , fetchData , sendLoginRequest , sendRegisterRequest};

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { DashBoard, SetQuestion, Result, TestSetting } from "../pages/import";
+import { DashBoard, SetQuestion, Result, TestSetting ,Login} from "../pages/import";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -9,6 +9,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashBoard />,
+  },
+  {
+    path:'/login',
+    element:<Login />
   },
   {
     path: "/test/:id/edit",
