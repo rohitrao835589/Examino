@@ -4,12 +4,13 @@ async function handleGetrequest(req , res){
     try{
         const id = req.params.id;
         const data = await  getTestById(id);
-        
         res.send(data);
     }catch(error){
         res.status(404).json({ error: "test not found" });
     }
 }
+
+
 async function handlePostRequest(req , res){
     try {
         const questionData = req.body;
