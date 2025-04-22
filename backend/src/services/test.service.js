@@ -1,18 +1,43 @@
 import Test from "../model/test.model.js";
+import User from "../model/user.model.js";
 
-async function getTestById(id){
-
-    const data = await Test.findOne({Testid:id} , {_id:false , createdAt:false , __v: false});
-    return data;
-}
-
-async function saveTest(testData) {
+async function getTestById(id, userID) {
     try {
-        const data = new Test(testData);
-        data.save();
+        const test = await Test.findOne(
+            { Testid: id },
+            { createdAt: false, __v: false }
+        );
+
+        if (!test) {
+            throw new Error("Test not found");
+        }
+
+        if (test.createdBy.toString() !== userID.toString()) {
+            throw new Error("Unauthorized access: You did not create this test");
+        }
+
+        return test;
     } catch (error) {
         throw new Error(error.message);
     }
 }
 
-export {getTestById , saveTest};
+async function saveTest(testData, userID) {
+    try {
+        
+        const newTest = new Test({ ...testData, createdBy: userID });
+        await newTest.save();
+
+        const user = await User.findById(userID);
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        user.testCreated.push(newTest._id);
+        await user.save();
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export { getTestById, saveTest };
