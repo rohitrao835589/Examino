@@ -1,6 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { DashBoard, SetQuestion, Result, TestSetting ,Login} from "../pages/import";
+import {
+  DashBoard,
+  SetQuestion,
+  Result,
+  TestSetting,
+  Login,
+} from "../pages/import";
+import { AuthProvider } from "../context/AuthProvider";
+import RequireAuth from "./RequireAuth";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -8,23 +16,47 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoard />,
+    element: (
+      <AuthProvider>
+        <RequireAuth>
+          <DashBoard />
+        </RequireAuth>
+      </AuthProvider>
+    ),
   },
   {
-    path:'/login',
-    element:<Login />
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/test/:id/edit",
-    element: <SetQuestion />,
+    element: (
+      <AuthProvider>
+        <RequireAuth>
+          <SetQuestion />
+        </RequireAuth>
+      </AuthProvider>
+    ),
   },
   {
     path: "/test/:id/setting",
-    element: <TestSetting />,
+    element: (
+      <AuthProvider>
+        <RequireAuth>
+          <TestSetting />
+        </RequireAuth>
+      </AuthProvider>
+    ),
   },
   {
     path: "/test/:id/result",
-    element: <Result />
+    element: (
+      <AuthProvider>
+        <RequireAuth>
+          <Result />
+        </RequireAuth>
+      </AuthProvider>
+    ),
   },
 ]);
 export default router;

@@ -11,7 +11,7 @@ import connectDb from "./configs/db.config.js";
 import testRouter from "./routers/test.routes.js";
 import userRouter from "./routers/user.routes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
-
+import verifyUserRouter from "./routers/verifyUser.routes.js";
 const app = express();
 
 app.use(cors({
@@ -27,6 +27,7 @@ connectDb();
 // Routes
 app.use("/test/", authMiddleware, testRouter);
 app.use('/user/', userRouter);
+app.use('/verifyUser/',authMiddleware , verifyUserRouter);
 
 
 const httpsOptions = {

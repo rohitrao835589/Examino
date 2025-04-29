@@ -46,4 +46,17 @@ async function sendRegisterRequest(credentials) {
     return "Register Failed: " + error.response?.data?.error || error.message;
   }
 }
-export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest };
+
+async function verifyUser(){
+  try {
+    const url = `${import.meta.env.VITE_API_BASE_URL}/verifyUser`;
+    const response = await axios.get(url , {
+      withCredentials:true,
+    })
+    return response.status;
+  } catch (error) {
+    console.log(error);
+    return 401;
+  }
+}
+export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest , verifyUser };
