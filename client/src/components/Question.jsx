@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-
-function Question({ question }) {
-    const [ans , setAns] = useState("");
+function Question({ question , handleChange , prevVal}) {
     function handleCheck(status , id){
         if(status === "on"){
-            setAns(id);
+          handleChange(id);
         }
     }
   return (
-    <form className="bg-white p-7">
+    <div className="bg-white p-7">
       <h1 className="font-semi-bold text-3xl my-4">{question.title}</h1>
       {question.optionType === "textBox" ? (
         <input
           type="text"
-          value={ans}
-          onChange={(e)=>setAns(e.target.val)}
+          value={prevVal}
+          onChange={(e)=>handleChange(e.target.value)}
           className="border-b-1 w-[90%] focus:border-b-2 focus:outline-0 focus:border-blue-700 "
         />
       ) : (
@@ -27,6 +24,7 @@ function Question({ question }) {
                 className="peer hidden"
                 id={option.id}
                 onChange={(e)=>handleCheck(e.target.value , option.id)}
+                checked={prevVal==option.id}
               />
               <label
                 className="block border rounded-md p-1 px-4 cursor-pointer 
@@ -41,7 +39,7 @@ function Question({ question }) {
           ))}
         </div>
       )}
-    </form>
+    </div>
   );
 }
 
