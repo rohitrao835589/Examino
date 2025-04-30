@@ -3,4 +3,5 @@ import DashBoard from "./dashboard/DashBoard";
 import Result from "./result/Result";
 import TestSetting from "./setQuestion/TestSetting";
 import Login from "./Login/Login";
-export {SetQuestion , DashBoard , Result , TestSetting , Login}
+import LandingTest from "./testPage/landingTest";
+export {SetQuestion , DashBoard , Result , TestSetting , Login , LandingTest}

@@ -47,6 +47,10 @@ const testSchema = new Schema({
     required: [true, "Testid is required"],
     unique: true,
   },
+  title:{
+    type:String,
+    default:"Untitled Test"
+  },
   questions: {
     type: [questionsSchema],
     default: [],

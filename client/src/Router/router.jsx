@@ -6,6 +6,7 @@ import {
   Result,
   TestSetting,
   Login,
+  LandingTest
 } from "../pages/import";
 import { AuthProvider } from "../context/AuthProvider";
 import RequireAuth from "./RequireAuth";
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         </RequireAuth>
       </AuthProvider>
     ),
+  },
+  {
+    path:"/test/:id",
+    element:<LandingTest></LandingTest>
   },
 ]);
 export default router;

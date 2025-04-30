@@ -34,7 +34,7 @@ function Result() {
 
   return (
     <div className="bg-purple-100 flex justify-center p-3 md:px-0 min-h-[100dvh]">
-      <PreviewQuestion questions={questions} />
+      <PreviewQuestion questions={questions} title={data.title}/>
     </div>
   );
 }
