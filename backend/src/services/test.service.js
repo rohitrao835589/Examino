@@ -18,7 +18,7 @@ async function getTestById(id, userID) {
 
         return test;
     } catch (error) {
-        throw new Error(error.message);
+        throw error;
     }
 }
 async function saveTest(testData, userID) {
@@ -35,7 +35,7 @@ async function saveTest(testData, userID) {
         user.testCreated.push(newTest._id);
         await user.save();
     } catch (error) {
-        throw new Error(error.message);
+        throw error;
     }
 }
 

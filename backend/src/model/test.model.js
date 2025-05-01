@@ -47,9 +47,9 @@ const testSchema = new Schema({
     required: [true, "Testid is required"],
     unique: true,
   },
-  title:{
-    type:String,
-    default:"Untitled Test"
+  title: {
+    type: String,
+    default: "Untitled Test",
   },
   questions: {
     type: [questionsSchema],
@@ -58,6 +58,10 @@ const testSchema = new Schema({
   settings: {
     type: settingSchema,
     required: true,
+  },
+  responses: {
+    type: [{ type: Schema.Types.ObjectId, ref: "TestResponse" }],
+    default: [],
   },
   createdBy: {
     type: Schema.Types.ObjectId,
