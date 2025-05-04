@@ -20,7 +20,17 @@ async function fetchData(id) {
     return null;
   }
 }
-
+async function fetchTestResponses(testId){
+  const url = `${import.meta.env.VITE_API_BASE_URL}/test/${testId}/result`;
+  try {
+    const response =await axios.get(url , {
+      withCredentials:true
+    })
+    return response;
+  } catch (error) {
+    return error.message
+  }
+}
 async function sendLoginRequest(credentials) {
   const url = `${import.meta.env.VITE_API_BASE_URL}/user/login`;
 
@@ -74,4 +84,4 @@ async function sendTestResponse(ans , testId) {
     return error.message;
   }
 }
-export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest , verifyUser ,sendTestResponse};
+export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest , verifyUser ,sendTestResponse , fetchTestResponses};

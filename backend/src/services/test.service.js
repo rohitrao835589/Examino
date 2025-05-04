@@ -1,11 +1,11 @@
 import Test from "../model/test.model.js";
 import User from "../model/user.model.js";
 
-async function getTestById(id, userID) {
+async function getTestById(id) {
     try {
         const test = await Test.findOne(
             { Testid: id },
-            { createdAt: false, __v: false }
+            { createdAt: false, __v: false , responses:false}
         );
 
         if (!test) {
@@ -33,5 +33,16 @@ async function saveTest(testData, userID) {
         throw error;
     }
 }
+async function getTestResponses(testId){
+    try {
+        const test = getTestById(testId);
+        if(!test){
+            throw new Error("Test not Found");
+        }
+        return test.responses;
+    } catch (error) {
+        throw error;
+    }
+}
 
-export { getTestById, saveTest };
+export { getTestById, saveTest  , getTestResponses};
