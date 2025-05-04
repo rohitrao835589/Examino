@@ -26,22 +26,18 @@ async function fetchTestResponses(testId){
     const response =await axios.get(url , {
       withCredentials:true
     })
-    return response;
+    
+    return response.data;
   } catch (error) {
     return error.message
   }
 }
 async function sendLoginRequest(credentials) {
   const url = `${import.meta.env.VITE_API_BASE_URL}/user/login`;
-
-  try {
     const response = await axios.post(url, credentials, {
       withCredentials: true,
     });
     return response.status;
-  } catch (error) {
-    return "Login Failed" + (error.response?.data?.error || error.message);
-  }
 }
 
 async function sendRegisterRequest(credentials) {

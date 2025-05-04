@@ -4,7 +4,7 @@ import authMiddleware from "../middleware/authMiddleware.js"
 const testRouter = Router();
 
 testRouter.get("/:id",handleGetrequest );
+testRouter.get('/:id/result' , authMiddleware , handleTestResponseGet);
 testRouter.post('/:id' , authMiddleware , handlePostRequest);
-testRouter.post('/:id/result' , authMiddleware , handleTestResponseGet);
 
 export default testRouter;

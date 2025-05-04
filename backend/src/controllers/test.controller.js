@@ -25,7 +25,7 @@ async function handlePostRequest(req , res){
 async function handleTestResponseGet(req , res){
     const testId = req.params.id;
     try{
-        const testResponses = await getTestResponses(testId);
+        const testResponses = await getTestResponses(testId);        
         res.status(200).send(testResponses);
     }catch(e){
         res.status(404).send("error");

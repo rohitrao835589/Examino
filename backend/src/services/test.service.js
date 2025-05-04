@@ -35,7 +35,10 @@ async function saveTest(testData, userID) {
 }
 async function getTestResponses(testId){
     try {
-        const test = getTestById(testId);
+        const test = await Test.findOne(
+            { Testid: testId },
+            { responses:1 ,  _id: 0}
+        );
         if(!test){
             throw new Error("Test not Found");
         }
