@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Question } from "../../components/import";
-function ShowTestQuestions({ data }) {
+import {sendTestResponse} from "../../services/api.js"
+function ShowTestQuestions({ data , setSubmitted}) {
   const [index, setIndex] = useState(0);
   const [ans, setAns] = useState(
     Array.from({ length: data.questions.length }, () => "")
@@ -17,6 +18,13 @@ function ShowTestQuestions({ data }) {
       return prev.map((ele, i) => (i == index ? val : ele));
     });
     console.log(ans);
+  }
+  async function handleSubmit(){
+    console.log("from submitted");
+    const res = await sendTestResponse(ans , data.Testid);
+    if(res){
+      setSubmitted(res);
+    }
   }
   return (
     <div className="h-screen  flex justify-center items-center px-4">
@@ -35,7 +43,8 @@ function ShowTestQuestions({ data }) {
           </button>
 
           {index === data.questions.length - 1 ? (
-            <button className="mt-2 mx-4 py-3 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition duration-200">
+            <button className="mt-2 mx-4 py-3 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition duration-200" 
+            onClick={handleSubmit}>
               Submit
             </button>
           ) : (

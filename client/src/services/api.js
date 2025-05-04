@@ -59,4 +59,19 @@ async function verifyUser(){
     return 401;
   }
 }
-export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest , verifyUser };
+async function sendTestResponse(ans , testId) {
+  try {
+    const url = `${import.meta.env.VITE_API_BASE_URL}/testresponse/${testId}`;
+    const res = await  axios.post(url , ans , {
+      withCredentials:true
+    })
+    if(res.status==200){
+      return "Your response has been submitted";
+    }else{
+      return "Something went wrong";
+    }
+  } catch (error) {
+    return error.message;
+  }
+}
+export { sendPostRequest, fetchData, sendLoginRequest, sendRegisterRequest , verifyUser ,sendTestResponse};

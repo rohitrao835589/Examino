@@ -11,11 +11,6 @@ async function getTestById(id, userID) {
         if (!test) {
             throw new Error("Test not found");
         }
-
-        if (test.createdBy.toString() !== userID.toString()) {
-            throw new Error("Unauthorized access: You did not create this test");
-        }
-
         return test;
     } catch (error) {
         throw error;

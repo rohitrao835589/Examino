@@ -5,6 +5,7 @@ import ShowTestQuestions from "./ShowTestQuestions";
 function LandingTest() {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [submitted , setSubmitted ] = useState(false);
   const [started, setStarted] = useState(false);
   useEffect(() => {
     const load = async () => {
@@ -13,14 +14,23 @@ function LandingTest() {
     };
     load();
   }, [id]);
+  
   if (data === null) {
     return <h1 className="text-2xl text-center mt-4 ">NO TEST FOUND</h1>;
   }
-
+  if(submitted!==false){
+    return (
+        <div className="h-screen bg-gray-100 flex justify-center items-center px-4">
+        <div className="bg-white w-full max-w-fit shadow-2xl rounded-2xl p-8 text-center font-bold text-2xl">
+          {submitted}
+        </div>
+        </div>
+    )
+  }
   return (
     <>
-      {started == true ? (
-        <ShowTestQuestions data={data}/>
+      {started == true? (
+        <ShowTestQuestions data={data} setSubmitted={setSubmitted}/>
       ) : (
         <div className="h-screen bg-gray-100 flex justify-center items-center px-4">
           <div className="bg-white w-full max-w-md shadow-2xl rounded-2xl p-8 flex flex-col gap-6 items-center">

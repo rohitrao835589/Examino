@@ -16,6 +16,6 @@ const testResponseSchema = new Schema({
     }
 })
 
-const testResponseModel = model("TestResponse" , testResponseSchema);
+const TestResponse = model("TestResponse" , testResponseSchema);
 
 export default TestResponse;
